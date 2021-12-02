@@ -1,5 +1,3 @@
-const { MOVE_UP_KEY, MOVE_DOWN_KEY, MOVE_LEFT_KEY, MOVE_RIGHT_KEY, MESSAGES } = require('./constants');
-// Stores the active TCP connection object.
 let connection;
 
 const setupInput = function (conn) {
@@ -15,18 +13,12 @@ const setupInput = function (conn) {
 };
 
 const handleUserInput = function (key) {
-  // \u0003 maps to ctrl+c input
-  if (key === '\u0003') {
-    process.exit();
-  }
-  if (key === MOVE_UP_KEY) connection.write('Move: up');
-  if (key === MOVE_LEFT_KEY) connection.write('Move: left');
-  if (key === MOVE_DOWN_KEY) connection.write('Move: down');
-  if (key === MOVE_RIGHT_KEY) connection.write('Move: right');
-  for (let keyBinding in MESSAGES) {
-    if (key === keyBinding) connection.write('Say: ' + MESSAGES[keyBinding]);
-  }
-
+  if (input === '\u0003') process.exit(); //handle control c
+  if (input === 'w') connection.write(move.up);
+  if (input === 'a') connection.write(move.left);
+  if (input === 's') connection.write(move.down);
+  if (input === 'd') connection.write(move.right);
+  else if (input === 'm') connection.write(`Say: ${message [key]}`);
 };
 
 module.exports = setupInput;
